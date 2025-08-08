@@ -1,0 +1,44 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Project 422"
+run/main_scene="res://world.tscn"
+config/features=PackedStringArray("4.4", "Mobile")
+config/icon="res://icon.svg"
+
+[rendering]
+
+renderer/rendering_method="mobile"
+
+[xogot]
+
+project/editorState=[{
+"column": 0,
+"line": 33,
+"path": "res://rigid_body_2d.gd",
+"type": "file"
+}, {
+"column": 0,
+"line": 5,
+"path": "res://world.gd",
+"type": "file"
+}, {
+"column": 0,
+"line": 6,
+"path": "res://tile_map_layer.gd",
+"type": "file"
+}]
+project/breakpoints={
+"res://area_2d.gd": PackedInt32Array(),
+"res://character_body_2d.gd": PackedInt32Array(3),
+"res://rigid_body_2d.gd": PackedInt32Array()
+}
