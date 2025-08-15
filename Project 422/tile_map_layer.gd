@@ -9,3 +9,12 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+
+
+# node_global_pos is a Vector2 (e.g., some_node.global_position)
+# tilemap can be a TileMap or a TileMapLayer
+func _global_to_cell(tilemap: Node, node_global_pos: Vector2) -> Vector2i:
+	return tilemap.local_to_map(tilemap.to_local(node_global_pos))
+# cell is a Vector2i (tile coords)
+func _cell_to_global(tilemap: Node, cell: Vector2i) -> Vector2:
+	return tilemap.to_global(tilemap.map_to_local(cell))

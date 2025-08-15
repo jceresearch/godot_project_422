@@ -23,22 +23,25 @@ renderer/rendering_method="mobile"
 
 project/editorState=[{
 "column": 0,
-"line": 33,
+"line": 34,
 "path": "res://rigid_body_2d.gd",
 "type": "file"
 }, {
 "column": 0,
-"line": 5,
+"line": 13,
 "path": "res://world.gd",
 "type": "file"
 }, {
 "column": 0,
-"line": 6,
+"current": true,
+"line": 19,
 "path": "res://tile_map_layer.gd",
 "type": "file"
 }]
 project/breakpoints={
 "res://area_2d.gd": PackedInt32Array(),
 "res://character_body_2d.gd": PackedInt32Array(3),
-"res://rigid_body_2d.gd": PackedInt32Array()
+"res://rigid_body_2d.gd": PackedInt32Array(),
+"res://world.gd": PackedInt32Array(),
+"res://world.tscn::GDScript_sl8kj": PackedInt32Array()
 }
