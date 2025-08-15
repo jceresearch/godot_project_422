@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://46govtvnvdnr" path="res://world.gd" id="1_fj7yv"]
 [ext_resource type="Script" uid="uid://d3r67ecjeeept" path="res://tile_map_layer.gd" id="3_aqk2v"]
 [ext_resource type="Texture2D" uid="uid://bmebtpm10up35" path="res://tiles_forest.png" id="3_tlwt5"]
+[ext_resource type="Script" uid="uid://bluw8om8dqx7o" path="res://player.gd" id="4_036b0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aqk2v"]
 texture = ExtResource("3_tlwt5")
@@ -44,112 +45,6 @@ texture = ExtResource("3_tlwt5")
 [sub_resource type="TileSet" id="TileSet_036b0"]
 sources/1 = SubResource("TileSetAtlasSource_aqk2v")
 
-[sub_resource type="GDScript" id="GDScript_sl8kj"]
-script/source = "extends CharacterBody2D
-
-var generator := AudioStreamGenerator.new()
-var audio_playback : AudioStreamGeneratorPlayback
-var audio_player : AudioStreamPlayer
-
-var acceleration := 500.0
-var friction := 200.0
-var max_speed := 500.0
-
-@onready
-var tilemap: TileMapLayer = get_parent().get_node(\"TileMapLayer\")
-
-
-@onready
-var speed_label= get_parent().get_node(\"Label\") as Label
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-
-	# Use the project's audio mix rate to avoid resampling
-	generator.mix_rate = AudioServer.get_mix_rate()
-	generator.buffer_length = 0.1
-
-	audio_player = AudioStreamPlayer.new()
-	add_child(audio_player)
-	audio_player.stream = generator
-	audio_player.play()
-	await get_tree().process_frame
-	audio_playback = audio_player.get_stream_playback()
-	if audio_playback == null:
-		push_error(\"AudioStreamGeneratorPlayback is still null\")
-		return
-	# Test bip
-	await get_tree().create_timer(0.3).timeout
-	play_bip(440.0,0.15) # 440 Hz, 150 ms
-
-func play_bip(frequency: float, duration: float):
-	var sample_rate = generator.mix_rate
-	var total_samples = int(duration * sample_rate)
-	for i in range(total_samples):
-		# Sine wave formula
-		var t = float(i) / sample_rate
-		var sample = sin(2.0 * PI * frequency * t) * 0.2
-		audio_playback.push_frame(Vector2(sample, sample)) # stereo (L,R same)
-		
-
-# Tunables
-const PUSH_MULT := 1.5		# scale the impulse strength
-const MIN_REL_SPEED := 1.0	# ignore tiny nudgesx
-
-func _physics_process(delta: float) -> void:
-	var input_vector := Vector2.ZERO
-	var tile_coords = tilemap.local_to_map(global_position)
-	$Label.text= str( tile_coords[0])+ \" , \" + str(tile_coords[1])
-	# Get input from arrow keys or WASD
-	input_vector.x = Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\")
-	input_vector.y = Input.get_action_strength(\"ui_down\") - Input.get_action_strength(\"ui_up\")
-	# Normalize the vector to avoid faster diagonal movement
-	input_vector = input_vector.normalized()
-	
-	#Accelerate if there is input
-	if input_vector != Vector2.ZERO:
-		velocity = velocity.move_toward(input_vector * max_speed, acceleration * delta)
-	else:
-		# Apply friction when no input
-		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
-	
-	speed_label.text=str(velocity)
-	move_and_slide() 
-	var collision
-	var body
-	for i in get_slide_collision_count():
-		collision = get_slide_collision(i)
-		body = collision.get_collider()
-		if body is RigidBody2D:
-			_push_rigidbody(body, collision)
-			play_bip(300,.1)
-
-			
-	if Input.is_key_pressed(KEY_SPACE):
-		play_bip(500,0.5)
-		for enemy in get_tree().get_nodes_in_group(\"tribbles\"):
-				enemy.target_cell=tilemap._global_to_cell(tilemap,global_position)
-	if Input.is_key_pressed(KEY_1):
-		global_position=Vector2(0,0)
-		velocity= Vector2(0,0)
-		
-func _push_rigidbody(body: RigidBody2D, collision: KinematicCollision2D) -> void:
-	# Normal points from RigidBody -> CharacterBody.
-	var n := collision.get_normal()
-	# Component of our velocity into the body (positive when moving into it).
-	var rel_speed := -velocity.dot(n)
-	if rel_speed < MIN_REL_SPEED:
-		return
-	# Impulse magnitude J = m * Δv. Give the RB some of our speed along the normal.
-	# Scale up with PUSH_MULT if you want it stronger.
-	var j_mag := body.mass * rel_speed * PUSH_MULT
-	var impulse := n * j_mag
-
-	# Apply at contact point to also give it torque if off-center.
-	var contact_world := collision.get_position()
-	body.apply_impulse(impulse, contact_world - body.global_position)
-	
-				"
-
 [sub_resource type="Gradient" id="Gradient_lp1pl"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_gs6va"]
@@ -177,8 +72,8 @@ font_color = Color(0.886275, 0.141177, 1.68653e-07, 1)
 font_color = Color(0.968628, 0.980392, 0.858824, 1)
 
 [node name="World" type="Node2D"]
-position = Vector2(124, 207)
 script = ExtResource("1_fj7yv")
+gravity_force = 100.0
 metadata/_edit_vertical_guides_ = [-669.0]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -188,7 +83,7 @@ script = ExtResource("3_aqk2v")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(128, 103)
-script = SubResource("GDScript_sl8kj")
+script = ExtResource("4_036b0")
 
 [node name="Polygon2D" type="Polygon2D" parent="Player"]
 position = Vector2(-32, -90)
@@ -208,14 +103,11 @@ text = "Label"
 label_settings = SubResource("LabelSettings_036b0")
 
 [node name="Tribble" type="RigidBody2D" parent="."]
-position = Vector2(577, -79)
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_fj7yv")
 gravity_scale = 0.0
 can_sleep = false
 script = ExtResource("1_f3sb7")
-gravity_force = 500.0
-player_path = NodePath("../Player")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tribble"]
 position = Vector2(19, -1)
