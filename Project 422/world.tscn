@@ -1,10 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://bc1ywljnyg0nq"]
+[gd_scene load_steps=23 format=3 uid="uid://bc1ywljnyg0nq"]
 
-[ext_resource type="Script" uid="uid://dmc81a3k47mo0" path="res://rigid_body_2d.gd" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://dmc81a3k47mo0" path="res://enemy.gd" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://46govtvnvdnr" path="res://world.gd" id="1_fj7yv"]
 [ext_resource type="Script" uid="uid://d3r67ecjeeept" path="res://tile_map_layer.gd" id="3_aqk2v"]
 [ext_resource type="Texture2D" uid="uid://bmebtpm10up35" path="res://tiles_forest.png" id="3_tlwt5"]
 [ext_resource type="Script" uid="uid://bluw8om8dqx7o" path="res://player.gd" id="4_036b0"]
+[ext_resource type="Script" uid="uid://dt37m40xr4fy5" path="res://hunter.gd" id="6_ioo17"]
+[ext_resource type="Script" uid="uid://bs1i724wjyjva" path="res://hud.gd" id="6_pkg7o"]
+[ext_resource type="Script" uid="uid://c6so3sam0x60r" path="res://hud_root.gd" id="7_gbfbk"]
+[ext_resource type="Texture2D" uid="uid://crggcs2k23o5r" path="res://icon.svg" id="7_wse8f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aqk2v"]
 texture = ExtResource("3_tlwt5")
@@ -59,8 +63,8 @@ font_size = 30
 font_color = Color(0.996078, 0.984314, 0.254902, 1)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fj7yv"]
-friction = 0.5
-bounce = 0.2
+friction = 0.36
+bounce = 0.23
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fj7yv"]
 radius = 49.0102
@@ -68,66 +72,121 @@ radius = 49.0102
 [sub_resource type="LabelSettings" id="LabelSettings_aqk2v"]
 font_color = Color(0.886275, 0.141177, 1.68653e-07, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ic0uy"]
+size = Vector2(128, 125)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ioo17"]
+radius = 97.3088
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ioo17"]
+vertices = PackedVector2Array(1893.05, 1103.98, -662.07, 1099.01, -672.922, -400.109, 1900.94, -430.867)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-683, -410, 1911, -441, 1903, 1114, -672, 1109)])
+
 [sub_resource type="LabelSettings" id="LabelSettings_dwbse"]
 font_color = Color(0.968628, 0.980392, 0.858824, 1)
 
-[node name="World" type="Node2D"]
-script = ExtResource("1_fj7yv")
-gravity_force = 100.0
+[node name="MainScene" type="Node"]
 metadata/_edit_vertical_guides_ = [-669.0]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="World" type="Node2D" parent="."]
+script = ExtResource("1_fj7yv")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="World"]
 position = Vector2(1, 1)
 tile_set = SubResource("TileSet_036b0")
 script = ExtResource("3_aqk2v")
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="World"]
 position = Vector2(128, 103)
 script = ExtResource("4_036b0")
 
-[node name="Polygon2D" type="Polygon2D" parent="Player"]
+[node name="Polygon2D" type="Polygon2D" parent="World/Player"]
 position = Vector2(-32, -90)
 scale = Vector2(0.0361473, 0.0516168)
 color = Color(0.886275, 0.141177, 1.68653e-07, 1)
 texture = SubResource("GradientTexture2D_gs6va")
 polygon = PackedVector2Array(819, 1220, 1340.58, 1420.53, 1522, 2004, 779.257, 2269.96, 139.532, 1945.26, 261.987, 1443.93)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Player"]
 position = Vector2(-2, 0)
 shape = SubResource("CircleShape2D_f3sb7")
 
-[node name="Label" type="Label" parent="Player"]
+[node name="Label" type="Label" parent="World/Player"]
 offset_right = 17.0
 offset_bottom = 57.0
 text = "Label"
 label_settings = SubResource("LabelSettings_036b0")
 
-[node name="Tribble" type="RigidBody2D" parent="."]
-mass = 0.1
+[node name="Camera2D" type="Camera2D" parent="World/Player"]
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="Tribble" type="RigidBody2D" parent="World"]
+mass = 0.518
 physics_material_override = SubResource("PhysicsMaterial_fj7yv")
 gravity_scale = 0.0
 can_sleep = false
 script = ExtResource("1_f3sb7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Tribble"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Tribble"]
 position = Vector2(19, -1)
 shape = SubResource("CircleShape2D_fj7yv")
 
-[node name="Polygon2D" type="Polygon2D" parent="Tribble"]
+[node name="Polygon2D" type="Polygon2D" parent="World/Tribble"]
 position = Vector2(-5, -104)
 scale = Vector2(0.183483, 0.372016)
 polygon = PackedVector2Array(-147.153, 274.182, 125.352, 137.091, 414.208, 266.118, 147.153, 400.52)
 
-[node name="Label" type="Label" parent="Tribble"]
+[node name="Label" type="Label" parent="World/Tribble"]
 offset_right = 17.0
 offset_bottom = 57.0
 text = "Label"
 label_settings = SubResource("LabelSettings_aqk2v")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 28.0
-offset_top = 370.0
-offset_right = 115.0
-offset_bottom = 427.0
+[node name="Hunter" type="CharacterBody2D" parent="World"]
+script = ExtResource("6_ioo17")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Hunter"]
+position = Vector2(-3, 0.5)
+shape = SubResource("RectangleShape2D_ic0uy")
+
+[node name="Sprite2D" type="Sprite2D" parent="World/Hunter"]
+texture = ExtResource("7_wse8f")
+
+[node name="RayCast2D" type="RayCast2D" parent="World/Hunter"]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="World/Hunter"]
+debug_enabled = true
+
+[node name="Label" type="Label" parent="World/Hunter"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="hitbox" type="Area2D" parent="World/Hunter"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Hunter/hitbox"]
+shape = SubResource("CircleShape2D_ioo17")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="World"]
+navigation_polygon = SubResource("NavigationPolygon_ioo17")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("6_pkg7o")
+
+[node name="HUDRoot" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_gbfbk")
+
+[node name="DebugLabel" type="Label" parent="HUD/HUDRoot"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 1026.0
+offset_right = 109.0
+offset_bottom = 1083.0
 text = "Label"
 label_settings = SubResource("LabelSettings_dwbse")
