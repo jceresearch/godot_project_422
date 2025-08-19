@@ -13,7 +13,10 @@ var friction: float =200.0
 @onready var ray: RayCast2D = $RayCast2D
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
 var default_color
+
+var bounce_force = 10.0
 var bounce_cooldown := 0.0
+
 func _ready():
 
 	default_color = $Sprite2D.modulate
@@ -25,7 +28,7 @@ func _ready():
 	agent.target_desired_distance = 100
 	agent.path_changed.connect(_on_path_computed)
 	motion_mode=MOTION_MODE_FLOATING
-	$hitbox.body_entered.connect(_on_Hitbox_body_entered)
+	#$hitbox.body_entered.connect(_on_Hitbox_body_entered)
 	
 func _physics_process(delta):
 	
@@ -68,11 +71,10 @@ func _on_path_computed():
 	# NavAgent path was calculated
 	pass
 
-var bounce_force = 10.0
+
 
 func _on_Hitbox_body_entered(body):
 	if body == player:
-		print("bounce back")
 		var away = (global_position - player.global_position).normalized()
 		velocity += away * bounce_force
 		bounce_cooldown = 0.1 # enemy will move backwards for 0.2s

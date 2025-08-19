@@ -9,8 +9,8 @@ func _ready() -> void:
 	generate()
 
 func generate():
-	for x in range(100):
-		for y in range(100):
+	for x in range(50,100):
+		for y in range(50,100):
 			tile_map_layer.set_cell(Vector2i(x, y),1,Vector2i(5, 0),0)
 			
 
