@@ -6,15 +6,16 @@ var vision_distance: float = 700.0
 const MAX_SPEED: float = 200.0
 var acceleration: float = 100.0
 var friction: float =200.0
-@onready var tilemap: TileMapLayer = get_tree().root.get_node("MainScene/World/TileMapLayer")
-@onready var world=get_tree().root.get_node("MainScene/World") 
-@onready var hud : Control = get_tree().root.get_node("MainScene/HUD/HUDRoot")
-@onready var player: CharacterBody2D = get_tree().root.get_node("MainScene/World/Player")
+@onready var tilemap: TileMapLayer = get_tree().root.get_node("Game/World/TileMapLayer")
+@onready var world=get_tree().root.get_node("Game/World") 
+@onready var hud : Control = get_tree().root.get_node("Game/HUD/HUDRoot")
+@onready var player: CharacterBody2D = get_tree().root.get_node("Game/World/Player")
 @onready var ray: RayCast2D = $RayCast2D
 @onready var agent: NavigationAgent2D = $NavigationAgent2D
 var default_color
 
-var bounce_force = 10.0
+var BOUNCE_FORCE = 100.0
+var BOUNCE_COOLDOWN_PERIOD=.03
 var bounce_cooldown := 0.0
 
 func _ready():
@@ -28,7 +29,7 @@ func _ready():
 	agent.target_desired_distance = 100
 	agent.path_changed.connect(_on_path_computed)
 	motion_mode=MOTION_MODE_FLOATING
-	#$hitbox.body_entered.connect(_on_Hitbox_body_entered)
+	$hitbox.body_entered.connect(_on_Hitbox_body_entered)
 	
 func _physics_process(delta):
 	
@@ -62,7 +63,7 @@ func _physics_process(delta):
 			pass
 		
 
-	$Label.text=str(int(distance_to_target))
+	$Label.text=str(agent.target_position)
 
 
 	move_and_slide()
@@ -76,5 +77,7 @@ func _on_path_computed():
 func _on_Hitbox_body_entered(body):
 	if body == player:
 		var away = (global_position - player.global_position).normalized()
-		velocity += away * bounce_force
-		bounce_cooldown = 0.1 # enemy will move backwards for 0.2s
+		velocity += away * BOUNCE_FORCE
+		GM.play_bip(40,.02)
+		bounce_cooldown = BOUNCE_COOLDOWN_PERIOD # enemy will move backwards for 0.2s
+		print("Bounce")

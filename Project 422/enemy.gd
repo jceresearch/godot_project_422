@@ -5,9 +5,9 @@ var target_cell: Vector2i = Vector2i(0,0)
 var max_speed: float = 400.0
 var slowing_strength: float = 1.0  # Higher = stronger drag when over speed
 
-@onready var tilemap: TileMapLayer = get_tree().root.get_node("MainScene/World/TileMapLayer")
-@onready var world=get_tree().root.get_node("MainScene/World") 
-@onready var hud : Control = get_tree().root.get_node("MainScene/HUD/HUDRoot")
+@onready var tilemap: TileMapLayer = get_tree().root.get_node("Game/World/TileMapLayer")
+@onready var world=get_tree().root.get_node("Game/World") 
+@onready var hud : Control = get_tree().root.get_node("Game/HUD/HUDRoot")
 
 
 func _ready():

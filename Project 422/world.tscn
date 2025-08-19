@@ -76,7 +76,7 @@ friction = 0.36
 bounce = 0.23
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fj7yv"]
-radius = 49.0102
+radius = 51.0882
 
 [sub_resource type="LabelSettings" id="LabelSettings_aqk2v"]
 font_color = Color(0.886275, 0.141177, 1.68653e-07, 1)
@@ -84,8 +84,8 @@ font_color = Color(0.886275, 0.141177, 1.68653e-07, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ic0uy"]
 size = Vector2(128, 125)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ioo17"]
-radius = 97.3088
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ioo17"]
+size = Vector2(132, 130)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ioo17"]
 vertices = PackedVector2Array(1893.05, 1103.98, -662.07, 1099.01, -672.922, -400.109, 1900.94, -430.867)
@@ -95,7 +95,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-683, -410, 1911, -441,
 [sub_resource type="LabelSettings" id="LabelSettings_dwbse"]
 font_color = Color(0.968628, 0.980392, 0.858824, 1)
 
-[node name="MainScene" type="Node"]
+[node name="Game" type="Node"]
 metadata/_edit_vertical_guides_ = [-669.0]
 
 [node name="World" type="Node2D" parent="."]
@@ -133,6 +133,8 @@ label_settings = SubResource("LabelSettings_036b0")
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+
+[node name="speech_marker" type="Node2D" parent="World/Player"]
 
 [node name="Tribble" type="RigidBody2D" parent="World"]
 collision_layer = 4
@@ -173,6 +175,7 @@ shape = SubResource("RectangleShape2D_ic0uy")
 texture = ExtResource("7_wse8f")
 
 [node name="RayCast2D" type="RayCast2D" parent="World/Hunter"]
+collision_mask = 3
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="World/Hunter"]
 debug_enabled = true
@@ -182,9 +185,11 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="hitbox" type="Area2D" parent="World/Hunter"]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Hunter/hitbox"]
-shape = SubResource("CircleShape2D_ioo17")
+shape = SubResource("RectangleShape2D_ioo17")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="World"]
 navigation_polygon = SubResource("NavigationPolygon_ioo17")

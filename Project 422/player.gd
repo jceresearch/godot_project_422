@@ -1,9 +1,9 @@
 extends CharacterBody2D
 class_name Enemy
 
-@onready var tilemap: TileMapLayer = get_tree().root.get_node("MainScene/World/TileMapLayer")
-@onready var world=get_tree().root.get_node("MainScene/World") 
-@onready var hud : Control = get_tree().root.get_node("MainScene/HUD/HUDRoot")
+@onready var tilemap: TileMapLayer = get_tree().root.get_node("Game/World/TileMapLayer")
+@onready var world=get_tree().root.get_node("Game/World") 
+@onready var hud : Control = get_tree().root.get_node("Game/HUD/HUDRoot")
 
 
 # For the player movements
@@ -60,7 +60,7 @@ func _physics_process(delta: float) -> void:
 		for enemy in get_tree().get_nodes_in_group("enemy"):
 			enemy.target_cell=tilemap._global_to_cell(tilemap,global_position)
 	elif  Input.is_action_just_pressed("Reposition"):
-		global_position=Vector2(0,0)
+		global_position=Vector2(100,100)
 		velocity= Vector2(0,0)
 		
 	if raise_temperature==true:
