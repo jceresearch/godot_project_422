@@ -19,6 +19,7 @@ const MAX_PUSH_FORCE=300
 
 func _ready() -> void:
 	# Use the project's audio mix rate to avoid resampling
+	motion_mode=MOTION_MODE_FLOATING
 	pass
 
 

@@ -1,12 +1,21 @@
 extends TileMapLayer
-
-
+@onready var tile_map_layer:TileMapLayer = self
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
-	var cell_size: Vector2 = tile_set.tile_size
+	var cell_size: Vector2 = self.tile_set.tile_size
 	# Move origin by half a tile to center the grid
 	position = -cell_size / 2.0
+	generate()
+
+func generate():
+	for x in range(100):
+		for y in range(100):
+			tile_map_layer.set_cell(Vector2i(x, y),1,Vector2i(5, 0),0)
+			
+
+#set_cell(coords: Vector2i, source_id: int = -1, atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0)
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

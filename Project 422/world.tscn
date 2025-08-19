@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bc1ywljnyg0nq"]
+[gd_scene load_steps=25 format=3 uid="uid://bc1ywljnyg0nq"]
 
 [ext_resource type="Script" uid="uid://dmc81a3k47mo0" path="res://enemy.gd" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://46govtvnvdnr" path="res://world.gd" id="1_fj7yv"]
@@ -9,6 +9,11 @@
 [ext_resource type="Script" uid="uid://bs1i724wjyjva" path="res://hud.gd" id="6_pkg7o"]
 [ext_resource type="Script" uid="uid://c6so3sam0x60r" path="res://hud_root.gd" id="7_gbfbk"]
 [ext_resource type="Texture2D" uid="uid://crggcs2k23o5r" path="res://icon.svg" id="7_wse8f"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_ioo17"]
+tile_data = PackedInt32Array(0, 1, 0)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ioo17"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aqk2v"]
 texture = ExtResource("3_tlwt5")
@@ -47,7 +52,10 @@ texture = ExtResource("3_tlwt5")
 10:2/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_036b0"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_ioo17")
 sources/1 = SubResource("TileSetAtlasSource_aqk2v")
+pattern_0 = SubResource("TileMapPattern_ioo17")
 
 [sub_resource type="Gradient" id="Gradient_lp1pl"]
 

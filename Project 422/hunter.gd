@@ -24,7 +24,7 @@ func _ready():
 	# Setup NavAgent
 	agent.target_desired_distance = 100
 	agent.path_changed.connect(_on_path_computed)
-	up_direction=Vector2.ZERO
+	motion_mode=MOTION_MODE_FLOATING
 	$hitbox.body_entered.connect(_on_Hitbox_body_entered)
 	
 func _physics_process(delta):
@@ -68,11 +68,11 @@ func _on_path_computed():
 	# NavAgent path was calculated
 	pass
 
-var bounce_force = 500.0
+var bounce_force = 10.0
 
 func _on_Hitbox_body_entered(body):
 	if body == player:
 		print("bounce back")
 		var away = (global_position - player.global_position).normalized()
 		velocity += away * bounce_force
-		bounce_cooldown = 0.2 # enemy will move backwards for 0.2s
+		bounce_cooldown = 0.1 # enemy will move backwards for 0.2s
