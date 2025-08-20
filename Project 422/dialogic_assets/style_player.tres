@@ -20,7 +20,9 @@ overrides = {}
 script = ExtResource("2_6pg0c")
 scene = ExtResource("4_wp72l")
 overrides = {
-"box_wobble_amount": "0.38",
+"box_wobble_amount": "0.0",
+"box_wobble_detail": "0.0",
+"box_wobble_speed": "0.1",
 "name_label_enabled": "false"
 }
 
@@ -35,4 +37,4 @@ layer_info = {
 }
 base_overrides = {}
 layers = Array[ExtResource("2_6pg0c")]([])
-metadata/_latest_layer = "11"
+metadata/_latest_layer = "10"

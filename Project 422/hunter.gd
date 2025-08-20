@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name enemy_walking
 #hunter.gs
 
 
@@ -63,7 +64,7 @@ func _physics_process(delta):
 			pass
 		
 
-	$Label.text=str(agent.target_position)
+	$Label.text=str(agent.target_position)+ " Distance:"+str(distance_to_target)
 
 
 	move_and_slide()

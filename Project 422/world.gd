@@ -1,4 +1,5 @@
 extends Node2D
+#world.gs
 
 var gravity_force= 400.0  as float
 var world_temperature = 100 as float
@@ -8,17 +9,11 @@ var cool_down_speed=1
 var nav_region: NavigationRegion2D
 var dialogic_layout =null  
 
-func _ready() -> void:
-	
-	var player=$Player
-	dialogic_layout=Dialogic.start("timeline_player")
-	dialogic_layout.register_character("res://dialogic_assets/dlg_character_player.dch",player.get_node("speech_marker"))
-	
+@onready var player: CharacterBody2D = get_tree().root.get_node("Game/World/Player")
 
-	
-	
-	
-	
+func _ready() -> void:
+
+
 	
 	spawn_enemy(5,get_node("Tribble"),"flying", true)
 	spawn_enemy(2,get_node("Hunter"),"walking",true)

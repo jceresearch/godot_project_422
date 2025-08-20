@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Enemy
+class_name Player
 
 @onready var tilemap: TileMapLayer = get_tree().root.get_node("Game/World/TileMapLayer")
 @onready var world=get_tree().root.get_node("Game/World") 
@@ -20,7 +20,14 @@ const MAX_PUSH_FORCE=300
 func _ready() -> void:
 	# Use the project's audio mix rate to avoid resampling
 	motion_mode=MOTION_MODE_FLOATING
-	pass
+	
+	var dialogic_layout=Dialogic.start("res://dialogic_assets/player_timeline.dtl")
+	var speech_marker = get_tree().root.get_node("Game/World/Player/speech_marker")
+	#var speech_marker= get_node("speech_marker")
+	var player_character=load("res://dialogic_assets/character_player.dch")
+	dialogic_layout.register_character(player_character,speech_marker)
+	
+	
 
 
 func _physics_process(delta: float) -> void:
@@ -40,9 +47,13 @@ func _physics_process(delta: float) -> void:
 	#$Label.text= (str( tile_coords[0])+ " , " + str(tile_coords[1]))
 	$Label.text=str(global_position)
 	hud.update_debug(str(int(world.world_temperature)))
+	
+	
+
 	move_and_slide() 
-	position.x = clamp(position.x, 0.0, GM.GAME_SIZE.x)
-	position.y = clamp(position.y, 0.0, GM.GAME_SIZE.y)
+
+	global_position.x = clamp(global_position.x, 0.0, GM.GAME_SIZE.x)
+	global_position.y = clamp(global_position.y, 0.0, GM.GAME_SIZE.y)
 	var collision
 	var body
 	for i in get_slide_collision_count():

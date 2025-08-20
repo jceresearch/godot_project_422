@@ -1,6 +1,6 @@
 
 extends RigidBody2D
-
+class_name enemy_flying
 var target_cell: Vector2i = Vector2i(0,0)
 var max_speed: float = 400.0
 var slowing_strength: float = 1.0  # Higher = stronger drag when over speed
