@@ -1,8 +1,4 @@
 
-### Localised READMEs
- - [简体中文](READMECN.md) (Simplified Chinese)
-
-
 # TODO Manager
 
 ![example_image](https://github.com/OrigamiDev-Pete/TODO_Manager/blob/main/addons/Todo_Manager/doc/images/example1.png)
