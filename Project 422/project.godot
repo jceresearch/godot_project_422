@@ -134,23 +134,23 @@ renderer/rendering_method="mobile"
 
 project/editorState=[{
 "column": 0,
-"line": 13,
+"line": 20,
 "path": "res://world.gd",
 "type": "file"
 }, {
-"column": 0,
-"line": 14,
+"column": 22,
+"current": true,
+"line": 3,
 "path": "res://tile_map_layer.gd",
 "type": "file"
 }, {
 "column": 0,
-"current": true,
 "line": 30,
 "path": "res://hunter.gd",
 "type": "file"
 }, {
 "column": 0,
-"line": 24,
+"line": 4,
 "path": "res://player.gd",
 "type": "file"
 }, {
@@ -158,12 +158,18 @@ project/editorState=[{
 "line": 15,
 "path": "res://enemy.gd",
 "type": "file"
+}, {
+"column": 0,
+"line": 8,
+"path": "res://navigation_manager.gd",
+"type": "file"
 }]
 project/breakpoints={
 "res://area_2d.gd": PackedInt32Array(),
 "res://character_body_2d.gd": PackedInt32Array(3),
+"res://navigation_manager.gd": PackedInt32Array(),
 "res://player.gd": PackedInt32Array(),
 "res://rigid_body_2d.gd": PackedInt32Array(),
-"res://world.gd": PackedInt32Array(),
+"res://world.gd": PackedInt32Array(53),
 "res://world.tscn::GDScript_sl8kj": PackedInt32Array()
 }

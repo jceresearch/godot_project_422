@@ -19,21 +19,6 @@ func _ready() -> void:
 	spawn_enemy(2,get_node("Hunter"),"walking",true)
 	
 
-	# Create NavigationRegion2D
-	nav_region = $NavigationRegion2D
-
-
-	# Create a NavigationPolygon that is a big rectangle
-	var nav_poly := NavigationPolygon.new()
-	var outline := [
-		Vector2(0, 0),
-		Vector2(GM.GAME_SIZE.x, 0),
-		Vector2(GM.GAME_SIZE.x, GM.GAME_SIZE.y),
-		Vector2(0, GM.GAME_SIZE.y)
-	]
-	nav_poly.add_outline(outline)
-	nav_poly.make_polygons_from_outlines()
-	nav_region.navigation_polygon = nav_poly
 
 	
 
@@ -51,9 +36,6 @@ func spawn_enemy(count: int, original_node, group: String, destroy: bool=true) -
 
 			
 
-	
-	
-	
 	
 	
 	

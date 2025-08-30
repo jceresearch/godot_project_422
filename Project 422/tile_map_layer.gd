@@ -2,7 +2,6 @@ extends TileMapLayer
 @onready var tile_map_layer:TileMapLayer = self
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
 	var cell_size: Vector2 = self.tile_set.tile_size
 	# Move origin by half a tile to center the grid
 	position = -cell_size / 2.0

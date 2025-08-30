@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bs1i724wjyjva" path="res://hud.gd" id="6_pkg7o"]
 [ext_resource type="Script" uid="uid://c6so3sam0x60r" path="res://hud_root.gd" id="7_gbfbk"]
 [ext_resource type="Texture2D" uid="uid://crggcs2k23o5r" path="res://icon.svg" id="7_wse8f"]
+[ext_resource type="Script" uid="uid://ddwsi8yvoiv1k" path="res://navigation_manager.gd" id="9_ic0uy"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_ioo17"]
 tile_data = PackedInt32Array(0, 1, 0)
@@ -87,11 +88,6 @@ size = Vector2(128, 125)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ioo17"]
 size = Vector2(132, 130)
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_ioo17"]
-vertices = PackedVector2Array(1893.05, 1103.98, -662.07, 1099.01, -672.922, -400.109, 1900.94, -430.867)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-683, -410, 1911, -441, 1903, 1114, -672, 1109)])
 
 [sub_resource type="LabelSettings" id="LabelSettings_dwbse"]
 font_color = Color(0.968628, 0.980392, 0.858824, 1)
@@ -192,10 +188,11 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Hunter/hitbox"]
+visible = false
 shape = SubResource("RectangleShape2D_ioo17")
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="World"]
-navigation_polygon = SubResource("NavigationPolygon_ioo17")
+[node name="NavigationManager" type="Node2D" parent="World"]
+script = ExtResource("9_ic0uy")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("6_pkg7o")
