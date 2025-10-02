@@ -138,9 +138,9 @@ project/editorState=[{
 "path": "res://world.gd",
 "type": "file"
 }, {
-"column": 22,
+"column": 11,
 "current": true,
-"line": 3,
+"line": 7,
 "path": "res://tile_map_layer.gd",
 "type": "file"
 }, {
@@ -170,6 +170,7 @@ project/breakpoints={
 "res://navigation_manager.gd": PackedInt32Array(),
 "res://player.gd": PackedInt32Array(),
 "res://rigid_body_2d.gd": PackedInt32Array(),
+"res://tile_map_layer.gd": PackedInt32Array(8),
 "res://world.gd": PackedInt32Array(53),
 "res://world.tscn::GDScript_sl8kj": PackedInt32Array()
 }
