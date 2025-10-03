@@ -43,9 +43,12 @@ func _physics_process(_delta):
 	else:		
 		pass
 		
+	global_position.x = clamp(global_position.x, 0.0, GM.GAME_SIZE.x)
+	global_position.y = clamp(global_position.y, 0.0, GM.GAME_SIZE.y)
+	
 	#$Label.text="D:" + str(int(distance)) + \
 	#" T: " + str(target_cell[0]) + " , " + str(target_cell[1]) + \
 	#" V: "+ str(int(current_speed))
 	
-	$Label.text= str(linear_velocity.length())
+	#$Label.text= str(linear_velocity.length())
 	#$Label.text=str(int(linear_velocity[0]))+","+str(int(linear_velocity[1]))

@@ -9,9 +9,13 @@ var audio_is_beeping := false
 # References to scene elements
 var current_scene
 
-const GAME_SIZE: Vector2 = Vector2(2048, 2048)
+const GAME_SIZE: Vector2i = Vector2i(2048, 2048)
 
-
+func get_random_accessible_position()-> Vector2i:
+	var random_x: int= randi_range(0,GAME_SIZE.x)
+	var random_y: int=randi_range(0,GAME_SIZE.y)
+	return Vector2i(random_x,random_y)
+	
 
 func _ready():
 	# When the active scene changes (e.g. changing levels),

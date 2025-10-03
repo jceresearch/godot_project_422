@@ -12,18 +12,9 @@ var dialogic_layout =null
 @onready var player: CharacterBody2D = get_tree().root.get_node("Game/World/Player")
 
 func _ready() -> void:
-
-
-	
 	spawn_enemy(5,get_node("Tribble"),"flying", true)
 	spawn_enemy(2,get_node("Hunter"),"walking",true)
-	
-
-
-	
-
 func spawn_enemy(count: int, original_node, group: String, destroy: bool=true) -> void:
-	
 	for i in count:
 		var clone = original_node.duplicate() 
 		clone.position = Vector2(

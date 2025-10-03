@@ -20,14 +20,6 @@ const MAX_PUSH_FORCE=300
 func _ready() -> void:
 	# Use the project's audio mix rate to avoid resampling
 	motion_mode=MOTION_MODE_FLOATING
-	
-	var dialogic_layout=Dialogic.start("res://dialogic_assets/player_timeline.dtl")
-	var speech_marker = get_tree().root.get_node("Game/World/Player/speech_marker")
-	#var speech_marker= get_node("speech_marker")
-	var player_character=load("res://dialogic_assets/character_player.dch")
-	dialogic_layout.register_character(player_character,speech_marker)
-	
-	
 
 
 func _physics_process(delta: float) -> void:

@@ -3,7 +3,8 @@ class_name enemy_walking
 #hunter.gs
 
 
-var vision_distance: float = 700.0
+var vision_distance: float = 300.0
+var wander_distance: float= 200
 const MAX_SPEED: float = 200.0
 var acceleration: float = 100.0
 var friction: float =200.0
@@ -49,7 +50,7 @@ func _physics_process(delta):
 	else:
 		# lost sight → optional: wander or stop
 		$Sprite2D.modulate = default_color
-
+ 
 	if bounce_cooldown > 0:
 		bounce_cooldown -= delta
 	else:
@@ -61,13 +62,18 @@ func _physics_process(delta):
 			velocity = velocity.limit_length(MAX_SPEED)
 
 		else:
-			pass
-		
-
+			var new_point: Vector2= GM.get_random_accessible_position()
+			var new_direction := (new_point-global_position).limit_length(wander_distance)
+			var new_target: Vector2 = global_position + new_direction
+			var map_rid: RID = agent.get_navigation_map()
+			new_target = NavigationServer2D.map_get_closest_point(map_rid, new_target)
+			agent.set_target_position(new_target)
 	$Label.text=str(agent.target_position)+ " Distance:"+str(distance_to_target)
 
 
 	move_and_slide()
+	global_position.x = clamp(global_position.x, 0.0, GM.GAME_SIZE.x)
+	global_position.y = clamp(global_position.y, 0.0, GM.GAME_SIZE.y)
 	
 func _on_path_computed():
 	# NavAgent path was calculated
