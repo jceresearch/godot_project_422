@@ -132,7 +132,7 @@ renderer/rendering_method="mobile"
 [xogot]
 
 project/editorState=[{
-"column": 87,
+"column": 0,
 "line": 16,
 "path": "res://world.gd",
 "type": "file"
