@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bc1ywljnyg0nq"]
+[gd_scene format=3 uid="uid://bc1ywljnyg0nq"]
 
 [ext_resource type="Script" uid="uid://dmc81a3k47mo0" path="res://enemy.gd" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://46govtvnvdnr" path="res://world.gd" id="1_fj7yv"]
@@ -92,46 +92,46 @@ size = Vector2(132, 130)
 [sub_resource type="LabelSettings" id="LabelSettings_dwbse"]
 font_color = Color(0.968628, 0.980392, 0.858824, 1)
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node" unique_id=2075490413]
 metadata/_edit_vertical_guides_ = [-669.0]
 
-[node name="World" type="Node2D" parent="."]
+[node name="World" type="Node2D" parent="." unique_id=433810182]
 script = ExtResource("1_fj7yv")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="World"]
+[node name="TileMapLayer" type="TileMapLayer" parent="World" unique_id=1489122276]
 position = Vector2(1, 1)
 tile_set = SubResource("TileSet_036b0")
 script = ExtResource("3_aqk2v")
 
-[node name="Player" type="CharacterBody2D" parent="World"]
+[node name="Player" type="CharacterBody2D" parent="World" unique_id=1942870636]
 position = Vector2(128, 103)
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("4_036b0")
 
-[node name="Polygon2D" type="Polygon2D" parent="World/Player"]
+[node name="Polygon2D" type="Polygon2D" parent="World/Player" unique_id=508951983]
 position = Vector2(-32, -90)
 scale = Vector2(0.0361473, 0.0516168)
 color = Color(0.886275, 0.141177, 1.68653e-07, 1)
 texture = SubResource("GradientTexture2D_gs6va")
 polygon = PackedVector2Array(819, 1220, 1340.58, 1420.53, 1522, 2004, 779.257, 2269.96, 139.532, 1945.26, 261.987, 1443.93)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Player" unique_id=2133399058]
 position = Vector2(-2, 0)
 shape = SubResource("CircleShape2D_f3sb7")
 
-[node name="Label" type="Label" parent="World/Player"]
+[node name="Label" type="Label" parent="World/Player" unique_id=1417236373]
 offset_right = 17.0
 offset_bottom = 57.0
 text = "Label"
 label_settings = SubResource("LabelSettings_036b0")
 
-[node name="Camera2D" type="Camera2D" parent="World/Player"]
+[node name="Camera2D" type="Camera2D" parent="World/Player" unique_id=1250628638]
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
-[node name="Tribble" type="RigidBody2D" parent="World"]
+[node name="Tribble" type="RigidBody2D" parent="World" unique_id=234169500]
 collision_layer = 4
 collision_mask = 6
 mass = 0.518
@@ -140,68 +140,68 @@ gravity_scale = 0.0
 can_sleep = false
 script = ExtResource("1_f3sb7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Tribble"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Tribble" unique_id=1063924412]
 position = Vector2(19, -1)
 shape = SubResource("CircleShape2D_fj7yv")
 
-[node name="Polygon2D" type="Polygon2D" parent="World/Tribble"]
+[node name="Polygon2D" type="Polygon2D" parent="World/Tribble" unique_id=310164152]
 position = Vector2(-5, -104)
 scale = Vector2(0.183483, 0.372016)
 polygon = PackedVector2Array(-147.153, 274.182, 125.352, 137.091, 414.208, 266.118, 147.153, 400.52)
 
-[node name="Label" type="Label" parent="World/Tribble"]
+[node name="Label" type="Label" parent="World/Tribble" unique_id=1824324808]
 offset_right = 17.0
 offset_bottom = 57.0
 text = "Label"
 label_settings = SubResource("LabelSettings_aqk2v")
 
-[node name="Hunter" type="CharacterBody2D" parent="World"]
+[node name="Hunter" type="CharacterBody2D" parent="World" unique_id=715593332]
 collision_layer = 2
 collision_mask = 3
 motion_mode = 1
 wall_min_slide_angle = 0.262403
 script = ExtResource("6_ioo17")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Hunter"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Hunter" unique_id=703303010]
 position = Vector2(-3, 0.5)
 shape = SubResource("RectangleShape2D_ic0uy")
 
-[node name="Sprite2D" type="Sprite2D" parent="World/Hunter"]
+[node name="Sprite2D" type="Sprite2D" parent="World/Hunter" unique_id=182908472]
 texture = ExtResource("7_wse8f")
 
-[node name="RayCast2D" type="RayCast2D" parent="World/Hunter"]
+[node name="RayCast2D" type="RayCast2D" parent="World/Hunter" unique_id=435858595]
 collision_mask = 3
 script = ExtResource("9_k3n1d")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="World/Hunter"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="World/Hunter" unique_id=1594391228]
 debug_enabled = true
 
-[node name="Label" type="Label" parent="World/Hunter"]
+[node name="Label" type="Label" parent="World/Hunter" unique_id=35409570]
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="hitbox" type="Area2D" parent="World/Hunter"]
+[node name="hitbox" type="Area2D" parent="World/Hunter" unique_id=1117861664]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Hunter/hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Hunter/hitbox" unique_id=1706521611]
 visible = false
 shape = SubResource("RectangleShape2D_ioo17")
 
-[node name="NavigationManager" type="Node2D" parent="World"]
+[node name="NavigationManager" type="Node2D" parent="World" unique_id=577048717]
 script = ExtResource("9_ic0uy")
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=273366871]
 script = ExtResource("6_pkg7o")
 
-[node name="HUDRoot" type="Control" parent="HUD"]
+[node name="HUDRoot" type="Control" parent="HUD" unique_id=1251159918]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("7_gbfbk")
 
-[node name="DebugLabel" type="Label" parent="HUD/HUDRoot"]
+[node name="DebugLabel" type="Label" parent="HUD/HUDRoot" unique_id=14106116]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 1026.0
